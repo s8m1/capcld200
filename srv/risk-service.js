@@ -15,7 +15,7 @@ module.exports = cds.service.impl(async function () {
         });
     });
 
-    const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER"); 
+    const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER");
     /** * Event-handler for read-events on the BusinessPartners entity. 
     * Each request to the API Business Hub requires the apikey in the header. */
     this.on("READ", BusinessPartners, async (req) => {
@@ -23,10 +23,11 @@ module.exports = cds.service.impl(async function () {
         req.query.SELECT.count = false;
         req.query.where("LastName <> '' and FirstName <> '' ");
         return await BPsrv.transaction(req).send({
-            query: req.query, 
-            headers: { 
-                apikey: process.env.apikey, 
+            query: req.query,
+            headers: {
+                apikey: process.env.apikey,
             },
         });
     });
 });
+

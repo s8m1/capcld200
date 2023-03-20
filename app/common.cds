@@ -3,19 +3,21 @@ using riskmanagement as rm from '../db/schema';
 // Annotate Risk elements
 annotate rm.Risks with {
     ID
-    @title : 'Risk';
+                @title : 'Risk';
     title
-    @title : 'Title';
+                @title : 'Title';
     owner
-    @title : 'Owner';
+                @title : 'Owner';
     prio
-    @title : 'Priority';
+                @title : 'Priority';
     descr
-    @title : 'Description';
+                @title : 'Description';
     miti
-    @title : 'Mitigation';
+                @title : 'Mitigation';
     impact
-    @title : 'Impact';
+                @title : 'Impact';
+    bp          @title : 'Business Partner';
+    criticality @title : 'Criticality';
 }
 
 // Annotate Miti elements
@@ -48,4 +50,36 @@ annotate rm.Risks with {
             ]
         }
     });
+    bp   @(Common : {
+        Text            : bp.LastName,
+        TextArrangement : #TextOnly,
+        ValueList       : {
+            Label          : 'Business Partners',
+            CollectionPath : 'BusinessPartners',
+            Parameters     : [
+                {
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : bp_BusinessPartner,
+                    ValueListProperty : 'BusinessPartner'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'LastName'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'FirstName'
+                }
+            ]
+        }
+    })
+}
+
+annotate rm.BusinessPartners with {
+    BusinessPartner @(
+        UI.Hidden,
+        Common : {Text : LastName}
+    );
+    LastName        @title : 'Last Name';
+    FirstName       @title : 'First Name';
 }

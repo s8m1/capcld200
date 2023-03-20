@@ -9,7 +9,7 @@ entity Risks : managed {
       prio   : String(5);
       descr  : String;
       miti   : Association to Mitigations;
-      impact : Integer; //bp : Association to BusinessPartners; // You will need this definition in a later step criticality : Integer;
+      impact : Integer; //bp : association to BusinessPartners; // You will need this definition in a later step criticality : Integer;
 }
 
 entity Mitigations : managed {

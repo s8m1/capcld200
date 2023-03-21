@@ -62,5 +62,8 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        oauth2-configuration:
-        redirect-uris: https://<approuter-route>/login/callback
+        xsappname: risk-management-${org}-${space}
+        tenant-mode: dedicated      
+        "oauth2-configuration": 
+        "redirect-uris": 
+            - https://*.eu10-004.hana.ondemand.com/**
